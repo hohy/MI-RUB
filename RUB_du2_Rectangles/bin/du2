@@ -1,0 +1,4 @@
+#! /usr/bin/ruby
+require_relative '../lib/DU2/runner'
+runner = DU2::Runner.new(ARGV)
+runner.run
