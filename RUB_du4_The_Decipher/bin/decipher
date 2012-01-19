@@ -1,0 +1,4 @@
+#! /usr/bin/ruby
+require_relative '../lib/decipher/runner'
+runner = Decipher::Runner.new(ARGV)
+runner.run
