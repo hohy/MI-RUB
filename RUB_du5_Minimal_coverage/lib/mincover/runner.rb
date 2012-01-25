@@ -10,15 +10,18 @@ module MinCover
     end
     
     def run
+      puts "Running MinCover."      
       read_input
       @test_cases.each() { |test_case|
         begin
-          solve(test_case)
-          puts test_case.solution
+          solution = solve(test_case)
         rescue RuntimeError
-          
+          puts "No solution for #{test_case}."
+          solution = []          
         end
+        write_output(solution)
       }
+      @out_file.close if not @out_file.nil?
     end
     
     def solve(test_case)
@@ -29,7 +32,7 @@ module MinCover
         best_segment = MinCover::Segment.new(0, 0)
         no_solution = true
         test_case.segments.each() { |s|
-          if s.l < solved_lenght and s.r > best_segment.r 
+          if s.l <= solved_lenght and s.r > solved_lenght and s.r > best_segment.r 
             best_segment = s
             no_solution = false
           end
@@ -41,7 +44,7 @@ module MinCover
         used_segments << best_segment
         solved_lenght = best_segment.r        
       end
-      test_case.solution(used_segments)
+      used_segments      
     end
     
     def read_input
@@ -51,32 +54,30 @@ module MinCover
         n.times do |i|
           begin
             line = f.readline.strip
-          end while line.length == 0 # skip empty lines
+          end while line.length==0 # skip empty lines
           m = Integer(line)
           segments = []
           begin
             line = f.readline.strip
-            l = line.split(" ")[0]
-            r = line.split(" ")[1]
+            l = Integer(line.split(" ")[0])
+            r = Integer(line.split(" ")[1])
             segments << MinCover::Segment.new(l,r)
-          end while line=="0 0"
+          end while not line=="0 0"
           @test_cases << MinCover::TestCase.new(m, segments)
         end
-      }      
+      }     
     end
     
     def write_output(solution)
-      if not @options.out_file.nil? 
-        if File.exist?(@options.out_file) 
-          f = File.open(@options.out_file, a)
-        else
-          f = File.open(@options.out_file, w)
-        end
-        f.write(solution.length + "\n")
+      if not @options.out_file.nil?
+        if @out_file.nil?
+          @out_file = File.open(@options.out_file, "w")
+        end 
+        @out_file.write("#{solution.length}\n")
         solution.each { |item|           
-          f.write(item.to_s + "\n")
+          @out_file.write("#{item.to_s}\n")
         }                  
-        f.write("\n")
+        @out_file.write("\n")
       end
     end
   end
