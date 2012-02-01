@@ -1,9 +1,11 @@
 require_relative 'options'
 require_relative 'map'
+require_relative 'theseus'
+require_relative 'minotaurus'
 
 module TaM
   class Runner
-    def initialize
+    def initialize(argv)
       @options = TaM::Options.new(argv)
     end
     
@@ -19,15 +21,15 @@ module TaM
       # Place Minotaurus and Theseus on the map
       @theseus = TaM::Theseus.new
       if @options.the_pos.nil?        
-        @options.the_pos = @map.tunnels[rand(map.tunnels.size)]              
+        @options.the_pos = rand(map.tunnels.size+1)              
       end
-      @theseus.position = @options.the_pos
+      @theseus.position = @map.tunnels[@options.the_pos-1]
       
       @minotaurus = TaM::Minotaurus.new
       if @options.min_pos.nil?
-        @options.min_pos = @map.tunnels[rand(map.tunnels.size)]
+        @options.min_pos = rand(@map.tunnels.size+1)
       end
-      @minotaurus.position = @options.min_pos
+      @minotaurus.position = @map.tunnels[@options.min_pos-1]
       
       # main cycle
       while not @theseus.position == @minotaurus.position
@@ -36,7 +38,7 @@ module TaM
       end
       
       # evaluate result
-      @theseus.position.accept(this)
+      @theseus.position.accept(self)
     end
     
     # Potkají-li se na chodbě, je zabit Theseus.

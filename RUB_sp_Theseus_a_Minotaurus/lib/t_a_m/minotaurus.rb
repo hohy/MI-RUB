@@ -1,3 +1,4 @@
+require_relative 'being'
 module TaM
   class Minotaurus < Being
     def initialize
@@ -6,7 +7,7 @@ module TaM
         
     def find_next_tunnel      
       @position.tunnels.reverse.each { |tunnel|
-        if not tunnel.marks.include(:minotaurus)   # timto tunelem minotaur jeste nesel                                    
+        if not tunnel.marks.include?(:minotaurus)   # timto tunelem minotaur jeste nesel                                    
           tunnel.mark(:minotaurus)
           return tunnel                       
         end

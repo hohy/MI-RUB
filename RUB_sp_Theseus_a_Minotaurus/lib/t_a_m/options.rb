@@ -23,7 +23,7 @@ module TaM
         end 
         
         opts.on("-m", "--minotaurus number", Integer, "Id of tunnel where Minotaurus is located on start") do |id|
-          @the_pos = id
+          @min_pos = id
         end
         
         opts.on("-h", "--help", "Show this message") do

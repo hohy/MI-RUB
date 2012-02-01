@@ -1,3 +1,6 @@
+require_relative 'cave'
+require_relative 'tunnel'
+
 module TaM
   class Map
     attr_reader :caves
