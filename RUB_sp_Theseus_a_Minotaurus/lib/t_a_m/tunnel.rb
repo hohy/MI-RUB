@@ -2,11 +2,16 @@ module TaM
   class Tunnel
     include Comparable
     
-    attr_reader :id, :cave_a, :cave_b
+    attr_reader :id, :cave_a, :cave_b, :marks
     def initialize(id, cave_a, cave_b)
       @id = id
       @cave_a = cave_a
       @cave_b = cave_b
+      @marks = []
+    end
+    
+    def mark(being) 
+      @marks << being
     end
     
     def accept(being)

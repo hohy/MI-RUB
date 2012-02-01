@@ -1,12 +1,16 @@
-require 'set'
-
 module TaM
   class Cave
     attr_reader :id
     attr_reader :tunnels
+    attr_reader :candle
     def initialize(id)
       @id = id
-      @tunnels = SortedSet.new()
+      @tunnels = []
+      @candle = false
+    end
+    
+    def light_candle
+      @candle = true
     end
     
     def add_tunnel(tunnel)

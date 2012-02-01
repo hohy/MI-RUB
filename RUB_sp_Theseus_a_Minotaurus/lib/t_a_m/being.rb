@@ -3,8 +3,8 @@ module TaM
   # Superclass for beings (Theseus and Minotaurus) on map.
   class Being
     
-    def initialize(map)
-      @position = map.tunnels[rand(map.tunnels.size)]
+    attr_accessor :position
+    def initialize      
       @path = []
     end
     
@@ -37,7 +37,10 @@ module TaM
     
     # make step in cave
     def visit_cave(cave)
-      
+      target = find_next_tunnel
+      @path << @position
+      @position = target
     end
+        
   end
 end
