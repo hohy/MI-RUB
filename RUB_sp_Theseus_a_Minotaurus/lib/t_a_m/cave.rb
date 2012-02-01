@@ -7,6 +7,15 @@ module TaM
       @id = id
       @tunnels = []
       @candle = false
+      @marks = []
+    end
+    
+    def mark(mark)
+      @marks << mark
+    end
+    
+    def marked?(mark)
+      @marks.include?(mark)
     end
     
     def light_candle

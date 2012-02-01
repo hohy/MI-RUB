@@ -5,7 +5,8 @@ module TaM
       super
     end
         
-    def find_next_tunnel      
+    def find_next_tunnel
+      @position.mark(:minotaurus)      
       @position.tunnels.reverse.each { |tunnel|
         if not tunnel.marks.include?(:minotaurus)   # timto tunelem minotaur jeste nesel                                    
           tunnel.mark(:minotaurus)

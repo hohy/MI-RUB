@@ -2,7 +2,7 @@ require 'optparse'
 
 module TaM
   class Options
-    attr_reader :map_file
+    attr_reader :map_file, :output
     attr_accessor :the_pos, :min_pos
     def initialize(argv)
       @options = {}
@@ -17,6 +17,10 @@ module TaM
         opts.on("-f", "--file path", String, "Input file with map") do |mf|
           @map_file = mf
         end         
+        
+        opts.on("-o", "--out path", String, "Output directory for results") do |out|
+          @output = out
+        end
         
         opts.on("-t", "--theseus number", Integer, "Id of tunnel where Theseus is located on start") do |id|
           @the_pos = id

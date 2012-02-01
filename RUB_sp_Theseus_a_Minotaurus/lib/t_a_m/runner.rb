@@ -2,6 +2,7 @@ require_relative 'options'
 require_relative 'map'
 require_relative 'theseus'
 require_relative 'minotaurus'
+require 'graphviz'
 
 module TaM
   class Runner
@@ -15,7 +16,7 @@ module TaM
       if not @options.map_file.nil?
         @map.load_map_from_file(@options.map_file)
       else
-        # TOOD: Generate random map
+        # TODO: Generate random map
       end
       
       # Place Minotaurus and Theseus on the map
@@ -31,10 +32,17 @@ module TaM
       end
       @minotaurus.position = @map.tunnels[@options.min_pos-1]
       
+      #init output
+      init_output      
+      
       # main cycle
-      while not @theseus.position == @minotaurus.position
+      @steps = 0
+      write_current_state(0) # write initial state
+      while not @theseus.position == @minotaurus.position 
+        @steps += 1
         @theseus.make_step
         @minotaurus.make_step
+        write_current_state(@steps)
       end
       
       # evaluate result
@@ -43,14 +51,92 @@ module TaM
     
     # Potkají-li se na chodbě, je zabit Theseus.
     def visit_cave(cave)
-      puts "Minotaurus is winner."
+      result = "Minotaurus is winner."
+      puts result
+      write_output(result)
     end
     
     # Pokud potká Minotaura v jeskyni, zabije ho.
     def visit_tunnel(tunnel)
-      puts "Theseus is winner."
+      result = "Theseus is winner."
+      puts result
+      write_output(result)
     end
     
+    def write_current_state(out_file) 
+
+      if not @options.output.nil?              
+        g = GraphViz.new(:G, :type => :graph)
+        @map.caves.each { |id, cave|
+          color = "black"   
+          color = "lightblue" if cave.marked?(:theseus)
+          color = "pink" if cave.marked?(:minotaurus)
+          color = "lightblue:pink" if cave.marked?(:minotaurus) and cave.marked?(:theseus)
+          color = "blue" if cave == @theseus.position
+          color = "red" if cave == @minotaurus.position
+          color = "magenta" if cave == @minotaurus.position and cave == @theseus.position
+
+          fillcolor = "white"
+          fillcolor = "yellow" if cave.candle
+
+          g.add_nodes(cave.id, "color" => color, "fillcolor" => fillcolor)
+        }
+
+        @map.tunnels.each { |tunnel|
+          color = "black"
+
+          color = "lightblue" if tunnel.marks.include?(:theseus)
+          color = "pink" if tunnel.marks.include?(:minotaurus)
+          color = "lightblue:pink" if tunnel.marks.include?(:minotaurus) and tunnel.marks.include?(:theseus)
+          color = "blue" if tunnel == @theseus.position
+          color = "red" if tunnel == @minotaurus.position
+          color = "magenta" if tunnel == @minotaurus.position and tunnel == @theseus.position
+
+          g.add_edges(tunnel.cave_a.id, tunnel.cave_b.id, "color" => color, "penwidth" => "3")
+        }
+
+        g.output( :png => "#{@options.output}/#{out_file}.png" )      
+      end
+    end
+    
+    def init_output
+      if not @options.output.nil?
+        if not File.directory?(@options.output) 
+          Dir.new(@options.output)
+        end
+      end
+    end
+    
+    def write_output(result)
+      if not @options.output.nil?
+        File.open("#{@options.output}/result.html", "w") { |f| 
+          f.write (<<eos
+<?xml version="1.0" encoding="utf-8"?>          
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
+    "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+ <title>Result of Minotaurus and Theseus fight</title>
+</head>
+<body>
+<h1>#{result}</h1>
+eos
+          )
+          @steps.downto(0) { |i|
+            f.write("<p>Step #{i}:</p>\n")
+            f.write("<img src=\"#{i}.png\" alt=\"Step #{i}\" />\n")
+          }
+          
+          f.write (
+<<eos
+</body>
+</html>
+eos
+          )
+        }
+        puts "Result is written in #{@options.output}/result.html file." 
+      end
+    end
     
   end
 end

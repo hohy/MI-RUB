@@ -8,6 +8,7 @@ module TaM
     
     def find_next_tunnel
       result = nil
+      @position.mark(:theseus)
       @position.tunnels.each { |tunnel|
         if tunnel.marks.include?(:minotaurus)    # timto tunelem sel minotaur
           @position.light_candle          
