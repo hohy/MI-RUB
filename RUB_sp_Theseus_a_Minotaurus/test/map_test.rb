@@ -39,4 +39,13 @@ class MapTest < Test::Unit::TestCase
     assert_equal(expected.caves, instance.caves)
     assert_equal(expected.tunnels, instance.tunnels)
   end  
+  
+  def test_generate
+    instance = TaM::Map.new
+    assert_equal(0, instance.caves.size)
+    assert_equal(0, instance.tunnels.size)    
+    instance.generate(10, 20)
+    assert_equal(10, instance.caves.size)
+    assert_equal(20, instance.tunnels.size)
+  end
 end

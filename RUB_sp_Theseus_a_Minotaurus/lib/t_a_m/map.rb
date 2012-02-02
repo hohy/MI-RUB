@@ -27,6 +27,20 @@ module TaM
       }
     end
     
+    def generate(caves_num, tunnels_num)
+       caves_num.times { |i|
+          add_cave(TaM::Cave.new("C#{i}"))
+        }
+        tunnels_num.times { |i|
+          a = @caves["C#{rand(caves_num)}"]
+          b = @caves["C#{rand(caves_num)}"]
+          tunnel = TaM::Tunnel.new("T#{i}", a, b)
+          a.add_tunnel(tunnel)
+          b.add_tunnel(tunnel)
+          add_tunnel(tunnel)
+        }
+    end
+    
     def add_cave(new_cave)
       @caves[new_cave.id] = new_cave if not @caves.has_key?(new_cave.id)
     end

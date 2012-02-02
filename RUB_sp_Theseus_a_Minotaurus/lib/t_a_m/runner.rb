@@ -17,17 +17,7 @@ module TaM
         @map.load_map_from_file(@options.map_file)
       else
         # Generate random map
-        @options.caves_num.times { |i|
-          @map.add_cave(TaM::Cave.new("C#{i}"))
-        }
-        @options.tunnels_num.times { |i|
-          a = @map.caves["C#{rand(@options.caves_num)}"]
-          b = @map.caves["C#{rand(@options.caves_num)}"]
-          tunnel = TaM::Tunnel.new("T#{i}", a, b)
-          a.add_tunnel(tunnel)
-          b.add_tunnel(tunnel)
-          @map.add_tunnel(tunnel)
-        }
+        @map.generate(@options.caves_num, @options.tunnels_num)
       end
       
       # Place Minotaurus and Theseus on the map
