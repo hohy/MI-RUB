@@ -37,8 +37,12 @@ module TaM
           @caves_num = cn
         end
         
-        opts.on("-e", "--tunnels number", Integer, "Number of tunnels on generated map") do |cn|
-          @tunnels_num = cn
+        opts.on("-e", "--tunnels number", Integer, "Number of tunnels on generated map") do |en|
+          @tunnels_num = en
+        end
+        
+        opts.on("-l", "--limit number", Integer, "Limit for number of steps of algorithm (default: 100)") do |l|
+          @steps_limit = l
         end
         
         opts.on("-h", "--help", "Show this message") do

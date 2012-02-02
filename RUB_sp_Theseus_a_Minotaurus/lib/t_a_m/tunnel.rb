@@ -14,6 +14,10 @@ module TaM
       @marks << being
     end
     
+    def marked?(mark)
+      @marks.include?(mark)
+    end
+    
     def accept(being)
       being.visit_tunnel(self)
     end
