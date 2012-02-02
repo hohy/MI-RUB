@@ -41,7 +41,7 @@ module TaM
     end
     
     def to_s
-      str = "Cave #{@id} tunnels:"
+      str = "Cave #{@id}, tunnels: "
       @tunnels.each {|t| str += "#{t.id} "}
       str
     end
