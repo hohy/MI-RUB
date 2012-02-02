@@ -20,6 +20,7 @@ module TaM
     
     def light_candle
       @candle = true
+      puts "Candle fired in #{@id}"
     end
     
     def add_tunnel(tunnel)

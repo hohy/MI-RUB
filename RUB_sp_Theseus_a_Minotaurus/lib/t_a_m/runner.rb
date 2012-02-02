@@ -16,33 +16,47 @@ module TaM
       if not @options.map_file.nil?
         @map.load_map_from_file(@options.map_file)
       else
-        # TODO: Generate random map
+        # Generate random map
+        @options.caves_num.times { |i|
+          @map.add_cave(TaM::Cave.new("C#{i}"))
+        }
+        @options.tunnels_num.times { |i|
+          a = @map.caves["C#{rand(@options.caves_num)}"]
+          b = @map.caves["C#{rand(@options.caves_num)}"]
+          tunnel = TaM::Tunnel.new("T#{i}", a, b)
+          a.add_tunnel(tunnel)
+          b.add_tunnel(tunnel)
+          @map.add_tunnel(tunnel)
+        }
       end
       
       # Place Minotaurus and Theseus on the map
       @theseus = TaM::Theseus.new
       if @options.the_pos.nil?        
-        @options.the_pos = rand(map.tunnels.size+1)              
+        @options.the_pos = rand(@map.tunnels.size+1)              
       end
       @theseus.position = @map.tunnels[@options.the_pos-1]
+      @theseus.position.mark(:theseus)
       
       @minotaurus = TaM::Minotaurus.new
       if @options.min_pos.nil?
         @options.min_pos = rand(@map.tunnels.size+1)
       end
       @minotaurus.position = @map.tunnels[@options.min_pos-1]
+      @minotaurus.position.mark(:minotaurus)
       
       #init output
       init_output      
       
       # main cycle
-      @steps = 0
-      write_current_state(0) # write initial state
-      while not @theseus.position == @minotaurus.position 
-        @steps += 1
+      @steps = []      
+      write_current_state(0) # write initial state      
+      @steps << [@theseus.position.id, @minotaurus.position.id]
+      while (not @theseus.position == @minotaurus.position) and @options.steps_limit > @steps.size        
         @theseus.make_step
-        @minotaurus.make_step
-        write_current_state(@steps)
+        @minotaurus.make_step        
+        write_current_state(@steps.size)
+        @steps << [@theseus.position.id, @minotaurus.position.id]
       end
       
       # evaluate result
@@ -67,8 +81,10 @@ module TaM
 
       if not @options.output.nil?              
         g = GraphViz.new(:G, :type => :graph)
+        g[:size] = "7,7"        
+        
         @map.caves.each { |id, cave|
-          color = "black"   
+          color = "white"          
           color = "lightblue" if cave.marked?(:theseus)
           color = "pink" if cave.marked?(:minotaurus)
           color = "lightblue:pink" if cave.marked?(:minotaurus) and cave.marked?(:theseus)
@@ -76,10 +92,10 @@ module TaM
           color = "red" if cave == @minotaurus.position
           color = "magenta" if cave == @minotaurus.position and cave == @theseus.position
 
-          fillcolor = "white"
+          fillcolor = "black"
           fillcolor = "yellow" if cave.candle
 
-          g.add_nodes(cave.id, "color" => color, "fillcolor" => fillcolor)
+          g.add_nodes(cave.id, "fillcolor" => color, "color" => fillcolor, "penwidth" => 3, "style" => "filled")
         }
 
         @map.tunnels.each { |tunnel|
@@ -92,7 +108,7 @@ module TaM
           color = "red" if tunnel == @minotaurus.position
           color = "magenta" if tunnel == @minotaurus.position and tunnel == @theseus.position
 
-          g.add_edges(tunnel.cave_a.id, tunnel.cave_b.id, "color" => color, "penwidth" => "3")
+          g.add_edges(tunnel.cave_a.id, tunnel.cave_b.id, "color" => color, "penwidth" => "3", "labelfontsize" => "10", "label" => "#{tunnel.id}")
         }
 
         g.output( :png => "#{@options.output}/#{out_file}.png" )      
@@ -122,9 +138,9 @@ module TaM
 <h1>#{result}</h1>
 eos
           )
-          @steps.downto(0) { |i|
-            f.write("<p>Step #{i}:</p>\n")
-            f.write("<img src=\"#{i}.png\" alt=\"Step #{i}\" />\n")
+          (@steps.size-1).downto(0) { |i|
+            f.write("<p><b>Step #{i}</b> - Theseus position: #{@steps[i][0]}, Minotaurus position: #{@steps[i][1]}</p>\n")
+            f.write("<img src=\"#{i}.png\" alt=\"Step #{i}\" />\n")            
           }
           
           f.write (
