@@ -1,6 +1,8 @@
 require 'test/unit' 
 
-require 'tc_1' 
-require 'tc_2' 
-require 'tc_3' 
+require 'being_test'
+require 'cave_test'
+require 'map_test' 
+require 'minotaurus_test'
+require 'runner_test' 
 
