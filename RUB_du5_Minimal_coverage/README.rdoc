@@ -1,0 +1,14 @@
+== RUB_du5_Minimal_coverage
+
+Program lze spustit následovně:
+
+<tt>
+$ ruby -I . bin/mincover.rb 
+Usage:  mincov [ options ]
+    -f, --input-file path            Input file
+    -o, --output-file path           Output file
+    -h, --help                       Show this message
+<tt>
+
+
+Testy: <tt> ruby -I . test/ts_suite.rb </tt>
