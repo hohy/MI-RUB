@@ -11,7 +11,10 @@ Po doběhnutí algoritmu je vygenerován html soubor, který jednotlivé kroky z
 ===Spuštění
 Pro správný běh programu a generování grafického výstupu je potřeba mít nainstalovaný nástroj GraphViz (http://www.graphviz.org/) a ruby knihovnu +ruby-graphviz+ (http://rubygems.org/gems/ruby-graphviz).
 
-<tt>$ ruby -I . bin/thamin.rb </tt>
+
+Příklad spuštění:
+
+<tt>$ ruby -I . bin/thamin.rb -f input/test1.txt -o output</tt>
 
 Parametry programu:
 
@@ -51,3 +54,9 @@ C D<br>
 Vygeneruje mapu: 
 
 <tt>A -- B -- C -- D</tt>
+
+===Ukázka výstupu
+**Step 13** - Theseus position: C16, Minotaurus position: C12
+
+
+<img src=http://dl.dropbox.com/u/70369/13.png>

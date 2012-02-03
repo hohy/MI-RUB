@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>README - RUB_sp_Theseus_a_Minotaurus Docs</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body class="file">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./README_rdoc.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./TaM.html">TaM</a>
+  
+    <li><a href="./TaM/Being.html">TaM::Being</a>
+  
+    <li><a href="./TaM/Cave.html">TaM::Cave</a>
+  
+    <li><a href="./TaM/Map.html">TaM::Map</a>
+  
+    <li><a href="./TaM/Minotaurus.html">TaM::Minotaurus</a>
+  
+    <li><a href="./TaM/Options.html">TaM::Options</a>
+  
+    <li><a href="./TaM/Runner.html">TaM::Runner</a>
+  
+    <li><a href="./TaM/Theseus.html">TaM::Theseus</a>
+  
+    <li><a href="./TaM/Tunnel.html">TaM::Tunnel</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation" class="description">
+  
+<h1 id="label-Theseus+a+Minotaurus">Theseus a Minotaurus</h1>
+
+<h3 id="label-Zad%C3%A1n%C3%AD">Zadání</h3>
+
+<p>Jistě znáte báji o stvůře s býčí hlavou – Minotaurovi, který zajal krásnou
+Ariadnu a uvěznil ji ve svém labyrintu kdesi na ostrově Kréta. Jediný, kdo
+se ji pokusil vysvobodit, byl silák Theseus. Minotaurův labyrint byl sítí
+jeskyní a chodeb, které je spojovaly. Minotaurus i Theseus začínají v
+libovolné chodbě. Při vstupu do jeskyně ji Theseus opouští chodbou, která
+je sousední po pravé ruce, a označí ji. Je-li již označená, ignoruje ji a
+jde na další. Vždy směrem doprava. Pokud ovšem Minotaur v jeskyni byl,
+opouští tuto chodbu stejným vchodem, kterým ji opustil Minotaur. V tomto
+případě též rozsvítí svíčku. Pokud potká Minotaura v jeskyni, zabije ho.
+Potkají-li se na chodbě, je zabit Theseus. Minotaurus se pohybuje stejným
+způsobem až na to, že se vždy točí doleva. Jejich pohyby jsou
+synchronizované – probíhají zároveň. Formát vstupu a výstupu si zvolte
+sami. Jméno souboru program načte z příkazové řádky.</p>
+
+<h3 id="label-Popis">Popis</h3>
+
+<p>Program po spuštění načte mapu bludiště (případě vygeneruje náhodnou).
+Umístí na mapu Thesea a Minotaura. Ti se pak pohybují po mapě, dokud se
+nepotkají. Po každém kroku se vygeneruje obrázek s mapou na které jsou
+vyznačeny jednotlivé jeskyně, tunely, aktuální poloha Minotaura (červená
+barva), Thesea (modrá barva) a jejich předchozí cesta (světlejší barvy).
+Jeskyně, v kterých Theseus zapálil svíčku jsou označeny žlutou barvou.</p>
+
+<p>Po doběhnutí algoritmu je vygenerován html soubor, který jednotlivé kroky
+zobrazuje.</p>
+
+<h3 id="label-Spu%C5%A1t%C4%9Bn%C3%AD">Spuštění</h3>
+
+<p>Pro správný běh programu a generování grafického výstupu je potřeba mít
+nainstalovaný nástroj GraphViz (<a
+href="http://www.graphviz.org/">www.graphviz.org/</a>) a ruby knihovnu
+<code>ruby-graphviz</code> (<a
+href="http://rubygems.org/gems/ruby-graphviz">rubygems.org/gems/ruby-graphviz</a>).</p>
+
+<p>Příklad spuštění:</p>
+
+<p><code>$ ruby -I . bin/thamin.rb -f input/test1.txt -o output</code></p>
+
+<p>Parametry programu:</p>
+
+<p>Usage:  thamin.rb [ options ]</p>
+
+<pre>-f, --file path                  Input file with map
+-o, --out path                   Output directory for results
+-t, --theseus number             Id of tunnel where Theseus is located on start
+-m, --minotaurus number          Id of tunnel where Minotaurus is located on start
+-c, --caves number               Number of caves on generated map
+-e, --tunnels number             Number of tunnels on generated map
+-l, --limit number               Limit for number of steps of algorithm (default: 100)
+-h, --help                       Show this message</pre>
+
+<p>Všechny parametry jsou nepovinné. Pokud některý parametr chybí, vygeneruje
+se náhodná hodnota. Pokud chybí parametr -o (umístení výstupu), tak se
+nebude generovat detailní grafický výstup.</p>
+
+<h3 id="label-Testy">Testy</h3>
+
+<p>Testy je možno spustit pomocí příkazu:</p>
+
+<p><code>ruby -I . test/ts_suite.rb</code></p>
+
+<p>nebo</p>
+
+<p><code>rake test</code></p>
+
+<h3 id="label-Form%C3%A1t+vstupn%C3%ADho+souboru">Formát vstupního souboru</h3>
+
+<p>Každý řádek definuje jeden tunel mezi 2 jeskyněmi na mapě.</p>
+
+<p>Př: <code> A B&lt;br&gt; B C&lt;br&gt; C D&lt;br&gt; </code></p>
+
+<p>Vygeneruje mapu:</p>
+
+<p><code>A -- B -- C -- D</code></p>
+
+<h3 id="label-Uk%C3%A1zka+v%C3%BDstupu">Ukázka výstupu</h3>
+
+<p>**Step 13** - Theseus position: C16, Minotaurus position: C12</p>
+
+<p>&lt;img src=<img src="http://dl.dropbox.com/u/70369/13.png" />&gt;</p>
+
+</div>
+
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

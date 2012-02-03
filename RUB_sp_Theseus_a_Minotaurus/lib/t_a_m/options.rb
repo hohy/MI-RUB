@@ -51,7 +51,7 @@ module TaM
         end
 
         begin
-          argv = ["-h"] if argv.empty?
+          #argv = ["-h"] if argv.empty?
           opts.parse!(argv)
         rescue OptionParser::ParseError => e
           STDERR.puts e.message, "\n", opts

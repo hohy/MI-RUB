@@ -49,7 +49,7 @@
 
   <ul>
   
-    <li class="file"><a href="./README.html">README</a>
+    <li class="file"><a href="./README_rdoc.html">README</a>
   
   </ul>
 </nav>
@@ -83,86 +83,7 @@
   </div>
 </nav>
 
-<div id="documentation" class="description">
-  
-<h1 id="label-Theseus+a+Minotaurus">Theseus a Minotaurus</h1>
-
-<h3 id="label-Zad%C3%A1n%C3%AD">Zadání</h3>
-
-<p>Jistě znáte báji o stvůře s býčí hlavou – Minotaurovi, který zajal krásnou
-Ariadnu a uvěznil ji ve svém labyrintu kdesi na ostrově Kréta. Jediný, kdo
-se ji pokusil vysvobodit, byl silák Theseus. Minotaurův labyrint byl sítí
-jeskyní a chodeb, které je spojovaly. Minotaurus i Theseus začínají v
-libovolné chodbě. Při vstupu do jeskyně ji Theseus opouští chodbou, která
-je sousední po pravé ruce, a označí ji. Je-li již označená, ignoruje ji a
-jde na další. Vždy směrem doprava. Pokud ovšem Minotaur v jeskyni byl,
-opouští tuto chodbu stejným vchodem, kterým ji opustil Minotaur. V tomto
-případě též rozsvítí svíčku. Pokud potká Minotaura v jeskyni, zabije ho.
-Potkají-li se na chodbě, je zabit Theseus. Minotaurus se pohybuje stejným
-způsobem až na to, že se vždy točí doleva. Jejich pohyby jsou
-synchronizované – probíhají zároveň. Formát vstupu a výstupu si zvolte
-sami. Jméno souboru program načte z příkazové řádky.</p>
-
-<h3 id="label-Popis">Popis</h3>
-
-<p>Program po spuštění načte mapu bludiště (případě vygeneruje náhodnou).
-Umístí na mapu Thesea a Minotaura. Ti se pak pohybují po mapě, dokud se
-nepotkají. Po každém kroku se vygeneruje obrázek s mapou na které jsou
-vyznačeny jednotlivé jeskyně, tunely, aktuální poloha Minotaura (červená
-barva), Thesea (modrá barva) a jejich předchozí cesta (světlejší barvy).
-Jeskyně, v kterých Theseus zapálil svíčku jsou označeny žlutou barvou.</p>
-
-<p>Po doběhnutí algoritmu je vygenerován html soubor, který jednotlivé kroky
-zobrazuje.</p>
-
-<h3 id="label-Spu%C5%A1t%C4%9Bn%C3%AD">Spuštění</h3>
-
-<p>Pro správný běh programu a generování grafického výstupu je potřeba mít
-nainstalovaný nástroj GraphViz (<a
-href="http://www.graphviz.org/">www.graphviz.org/</a>) a ruby knihovnu
-<code>ruby-graphviz</code> (<a
-href="http://rubygems.org/gems/ruby-graphviz">rubygems.org/gems/ruby-graphviz</a>).</p>
-
-<p><code>$ ruby -I . bin/thamin.rb </code></p>
-
-<p>Parametry programu:</p>
-
-<p>Usage:  thamin.rb [ options ]</p>
-
-<pre>-f, --file path                  Input file with map
--o, --out path                   Output directory for results
--t, --theseus number             Id of tunnel where Theseus is located on start
--m, --minotaurus number          Id of tunnel where Minotaurus is located on start
--c, --caves number               Number of caves on generated map
--e, --tunnels number             Number of tunnels on generated map
--l, --limit number               Limit for number of steps of algorithm (default: 100)
--h, --help                       Show this message</pre>
-
-<p>Všechny parametry jsou nepovinné. Pokud některý parametr chybí, vygeneruje
-se náhodná hodnota. Pokud chybí parametr -o (umístení výstupu), tak se
-nebude generovat detailní grafický výstup.</p>
-
-<h3 id="label-Testy">Testy</h3>
-
-<p>Testy je možno spustit pomocí příkazu:</p>
-
-<p><code>ruby -I . test/ts_suite.rb</code></p>
-
-<p>nebo</p>
-
-<p><code>rake test</code></p>
-
-<h3 id="label-Form%C3%A1t+vstupn%C3%ADho+souboru">Formát vstupního souboru</h3>
-
-<p>Každý řádek definuje jeden tunel mezi 2 jeskyněmi na mapě.</p>
-
-<p>Př: <code> A B&lt;br&gt; B C&lt;br&gt; C D&lt;br&gt; </code></p>
-
-<p>Vygeneruje mapu:</p>
-
-<p><code>A -- B -- C -- D</code></p>
-
-</div>
+<p>This is the API documentation for RUB_sp_Theseus_a_Minotaurus Docs.
 
 
 <footer id="validator-badges">
