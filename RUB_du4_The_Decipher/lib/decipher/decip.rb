@@ -1,5 +1,5 @@
 module Decipher
-  class Decipher
+  class Decip
     
     attr_reader :output 
     def initialize(key)
@@ -10,8 +10,9 @@ module Decipher
     def decrypt(file)
       File.open(file, 'r').each_line { |line| 
         line.strip!        
-        output << decrypt_line(line)
+        @output << decrypt_line(line)
       }
+      @output
     end
     
     private

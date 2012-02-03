@@ -1,3 +1,13 @@
 == RUB_du4_The_Decipher
 
-You should document your project here.
+Program lze spustit pomocí <tt>ruby -I . bin/decipher -f input.txt</tt>
+
+Program lze spustit s následujícími parametry:
+
+    -f, --input-file path            Input file
+    -o, --output-file path           Output file
+    -k, --key number                 Decryption key
+    -h, --help                       Show this message
+
+
+Testy lze sputit z příkazové řádky pomocí <tt>ruby -I . test/ts_suite.rb</tt>.

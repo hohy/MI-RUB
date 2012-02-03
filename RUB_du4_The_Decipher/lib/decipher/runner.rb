@@ -1,15 +1,15 @@
-require_relative 'options'
-require_relative 'decipher'
-
+require_relative 'decip'
+require_relative 'options.rb'
 module Decipher
+
   class Runner
     def initialize (argv)
-      @options = Decipher::Options.new(argv)
+      @options = Decipher::Options.new(argv)      
     end
     
     def run
       
-      d = Decipher::Decipher.new(@options.key)
+      d = Decipher::Decip.new(@options.key)
       result = d.decrypt(@options.in_file)
       
       # if there is specified output file, write result into it. Otherwise print it to screen.
