@@ -9,10 +9,12 @@ Program po spuštění načte mapu bludiště (případě vygeneruje náhodnou).
 Po doběhnutí algoritmu je vygenerován html soubor, který jednotlivé kroky zobrazuje.
 
 ===Spuštění
-Pro správný běh programu a generování grafického výstupu je potřeba mít nainstalovaný nástroj GraphViz (http://www.graphviz.org/) a ruby knihovnu <tt>ruby-graphviz</tt> (http://rubygems.org/gems/ruby-graphviz).
+Pro správný běh programu a generování grafického výstupu je potřeba mít nainstalovaný nástroj GraphViz (http://www.graphviz.org/) a ruby knihovnu +ruby-graphviz+ (http://rubygems.org/gems/ruby-graphviz).
 
-<tt>
-$ ruby -I . bin/thamin.rb 
+<tt>$ ruby -I . bin/thamin.rb </tt>
+
+Parametry programu:
+
 Usage:  thamin.rb [ options ]
     -f, --file path                  Input file with map
     -o, --out path                   Output directory for results
@@ -22,22 +24,30 @@ Usage:  thamin.rb [ options ]
     -e, --tunnels number             Number of tunnels on generated map
     -l, --limit number               Limit for number of steps of algorithm (default: 100)
     -h, --help                       Show this message
-</tt>
 
 Všechny parametry jsou nepovinné. Pokud některý parametr chybí, vygeneruje se náhodná hodnota. Pokud chybí parametr -o (umístení výstupu), tak se nebude generovat detailní grafický výstup.
 
 ===Testy
+
 Testy je možno spustit pomocí příkazu:
+
 <tt>ruby -I . test/ts_suite.rb</tt>
+
 nebo
+
 <tt>rake test</tt>
 
 ===Formát vstupního souboru
+
 Každý řádek definuje jeden tunel mezi 2 jeskyněmi na mapě.
+
 Př:
 <tt>
-A B
-B C
-C D
+A B<br>
+B C<br>
+C D<br>
 </tt>
-Vygeneruje mapu: <tt>A -- B -- C -- D</tt>
+
+Vygeneruje mapu: 
+
+<tt>A -- B -- C -- D</tt>

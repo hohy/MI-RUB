@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rubygems/package_task'
 require 'rake'
 require 'rake/clean'
-require 'rdoc/task'
+require 'rake/rdoctask'
 require 'rake/testtask'
 
 spec = Gem::Specification.new do |s|
@@ -27,8 +27,8 @@ Gem::PackageTask.new(spec) do |p|
   p.need_zip = true
 end
 
-RDoc::Task.new do |rdoc|
-  files =['README', 'LICENSE', 'lib/**/*.rb']
+Rake::RDocTask.new do |rdoc|
+  files =['README.rdoc', 'lib/**/*.rb']
   rdoc.rdoc_files.add(files)
   rdoc.main = "README" # page to start on
   rdoc.title = "RUB_sp_Theseus_a_Minotaurus Docs"
