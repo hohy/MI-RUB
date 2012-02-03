@@ -1,0 +1,7 @@
+== Pentomino
+
+Program lze spustit pomocí <tt>ruby -I . bin/pentomino -x 10 -y 6</tt>
+
+Velikost pentomina lze měnit pomocí parametrů +x+ a +y+. Jednotlivé kostičky jsou definovány v souboru lib/pentomino/piece.rb
+
+Testy je nejlepší pouštět z NetBeans. Při spuštění z příkazové řádky pomocí <tt>ruby -I . test/ts_suite.rb</tt> ruby z nějakého důvodu nenajde metody +assert_true+ a +assert_false+ a tím pádem se některé testy neprovedou správně. Při spuštění testů v NetBeans projdou všechny testy v pořádku.
