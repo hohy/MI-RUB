@@ -26,7 +26,7 @@ class Being_test < Test::Unit::TestCase
     cb = TaM::Cave.new("B")
     tunnel = TaM::Tunnel.new(1, ca, cb)    
     instance.visit_tunnel(tunnel)
-    assert_true((instance.position == ca) || (instance.position == cb))
+    assert_equal(true, (instance.position == ca) || (instance.position == cb))
   end
   
   # If being is in cave, in next step it should be in tunnel

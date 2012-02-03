@@ -4,7 +4,8 @@ module TaM
     def initialize
       super
     end
-        
+    
+    # Finds tunnel where Minotaurus will go.
     def find_next_tunnel
       @position.mark(:minotaurus)      
       @position.tunnels.reverse.each { |tunnel|

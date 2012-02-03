@@ -6,27 +6,27 @@ class CaveTest < Test::Unit::TestCase
 
   def test_marks
     instance = TaM::Cave.new("Test cave")
-    assert_false(instance.marked?(:mark))
+    assert_equal(false, instance.marked?(:mark))
     instance.mark(:mark)
-    assert_true(instance.marked?(:mark))
-    assert_false(instance.marked?(:other_mark))
+    assert_equal(true, instance.marked?(:mark))
+    assert_equal(false, instance.marked?(:other_mark))
     instance.mark(:other_mark)
-    assert_true(instance.marked?(:other_mark))
-    assert_true(instance.marked?(:mark))
+    assert_equal(true, instance.marked?(:other_mark))
+    assert_equal(true, instance.marked?(:mark))
   end
 
   def test_candle
     instance = TaM::Cave.new("Test cave")
-    assert_false(instance.candle)
+    assert_equal(false, instance.candle)
     instance.light_candle
-    assert_true(instance.candle)
+    assert_equal(true, instance.candle)
   end
   
   def test_add_tunnel
     instance = TaM::Cave.new("A")
     cb = TaM::Cave.new("B")
     tunnel = TaM::Tunnel.new("tunnel", instance, cb)
-    assert_true(instance.tunnels.empty?)
+    assert_equal(true, instance.tunnels.empty?)
     instance.add_tunnel(tunnel)
     assert_equal([tunnel], instance.tunnels)
   end
@@ -37,9 +37,9 @@ class CaveTest < Test::Unit::TestCase
     instance_other_a = TaM::Cave.new("A")
     tunnel_a = TaM::Tunnel.new("A", instance_a, instance_b)
     
-    assert_true(instance_a == instance_other_a)
-    assert_false(instance_a == instance_b)
-    assert_false(instance_a == tunnel_a)    
+    assert_equal(true, instance_a == instance_other_a)
+    assert_equal(false, instance_a == instance_b)
+    assert_equal(false, instance_a == tunnel_a)    
   end
   
   def test_to_s
