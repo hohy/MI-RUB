@@ -1,3 +1,5 @@
 == RUB_du2_Rectangles
 
 Program lze spustit pomocí souboru bin/du2.
+
+Testy pomocí <tt>ruby -I . test/ts_suite.rb</tt>
